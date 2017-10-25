@@ -1,7 +1,7 @@
-module.exports = (system, FileIO) ->
-  {MenuBar, Modal, Util:{parseMenu}, Window} = system.UI
+TextareaTemplate = require "../templates/textarea"
 
-  # system.Achievement.unlock "Notepad.exe"
+module.exports = (system, FileIO) ->
+  {MenuBar, Modal, Observable, Util:{parseMenu}, Window} = system.UI
 
   exec = (cmd) ->
     ->
@@ -10,13 +10,26 @@ module.exports = (system, FileIO) ->
 
   TODO = -> console.log "TODO"
 
-  textarea = document.createElement "textarea"
-  textarea.spellcheck = false
-
   initialValue = ""
+  textContent = Observable ""
 
-  textarea.addEventListener "input", ->
-    handlers.saved textarea.value is initialValue
+  wordWrap = Observable true
+  fontStyle = Observable "monospace"
+
+  textContent.observe (value) ->
+    handlers.saved value is initialValue
+
+  textarea = TextareaTemplate
+    fontStyle: ->
+      fontFamily: fontStyle()
+    value: textContent
+    wrapStyle: ->
+      if wordWrap()
+        whiteSpace: "pre-wrap"
+      else
+        whiteSpace: "pre"
+
+  textarea.spellcheck = false
 
   handlers = Object.assign FileIO(system),
     loadFile: (blob, path) ->
@@ -24,12 +37,12 @@ module.exports = (system, FileIO) ->
       .then (text) ->
         handlers.currentPath path
         initialValue = text
-        textarea.value = initialValue
+        textContent initialValue
     newFile: ->
       initialValue = ""
-      textarea.value = initialValue
+      textContent initialValue
     saveData: ->
-      data = new Blob [textarea.value],
+      data = new Blob [textContent()],
         type: "text/plain"
 
       return Promise.resolve data
@@ -63,13 +76,14 @@ module.exports = (system, FileIO) ->
       dateText = (new Date).toString().split(" ").slice(0, -4).join(" ")
       document.execCommand("insertText", false, dateText)
 
-    wordWrap: TODO
+    wordWrap: ->
+      wordWrap.toggle()
 
     font: ->
-      Modal.prompt "Font", textarea.style.fontFamily or "monospace"
+      Modal.prompt "Font", fontStyle() or "monospace"
       .then (font) ->
         if font
-          textarea.style.fontFamily = font
+          fontStyle(font)
 
     statusBar: TODO
     viewHelp: TODO
@@ -114,7 +128,7 @@ module.exports = (system, FileIO) ->
         [A]bout Notepad
     """
     handlers: handlers
-  
+
   title = ->
     path = handlers.currentPath()
     if handlers.saved()
