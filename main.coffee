@@ -21,3 +21,8 @@ document.addEventListener "keydown", (e) ->
         handlers.open()
 
 editor = Editor(system, util.FileIO)
+
+postmaster.delegate = editor
+
+system.ready()
+.catch console.warn

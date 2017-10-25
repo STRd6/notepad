@@ -130,4 +130,4 @@ module.exports = (system, FileIO) ->
   document.body.appendChild menuBar.element
   document.body.appendChild textarea
 
-  return
+  return handlers
