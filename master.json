@@ -34,7 +34,7 @@
     },
     "style.styl": {
       "path": "style.styl",
-      "content": "body\n  display: flex\n\n  > textarea\n    flex: 1\n    font-family: \"Times New Roman\", monospace\n    font-size: 14px\n",
+      "content": "body\n  display: flex\n\n  > textarea\n    border: none\n    flex: 1\n    font-family: monospace\n    font-size: 14px\n    padding: 2px 4px\n    resize: none\n",
       "mode": "100644"
     }
   },
@@ -61,7 +61,7 @@
     },
     "style": {
       "path": "style",
-      "content": "module.exports = \"body {\\n  display: flex;\\n}\\nbody > textarea {\\n  flex: 1;\\n  font-family: \\\"Times New Roman\\\", monospace;\\n  font-size: 14px;\\n}\\n\";",
+      "content": "module.exports = \"body {\\n  display: flex;\\n}\\nbody > textarea {\\n  border: none;\\n  flex: 1;\\n  font-family: monospace;\\n  font-size: 14px;\\n  padding: 2px 4px;\\n  resize: none;\\n}\\n\";",
       "type": "blob"
     }
   },
