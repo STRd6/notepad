@@ -1,10 +1,35 @@
 body
   display: flex
 
-  > textarea
-    border: none
+  > editor
+    display: flex
+    flex-direction: column
     flex: 1
-    font-family: monospace
-    font-size: 14px
-    padding: 2px 4px
-    resize: none
+
+    > pre
+      display: none
+
+    > textarea
+      border: none
+      flex: 1
+      font-family: monospace
+      font-size: 14px
+      padding: 2px 4px
+      resize: none
+
+container.about
+  padding: 0 1em
+
+@media print
+  menu.bar, menu
+    display: none
+
+  body
+    display: initial
+
+    > editor
+      display: initial
+      > textarea
+        display: none
+      > pre
+        display: block

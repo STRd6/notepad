@@ -1,0 +1,6 @@
+container.about
+  h1 ZineOS Notepad.exe
+  p Version #{@version}
+  p A notepad clone in the vibe of win95. By Daniel X Moore.
+  p
+    a(href="https://docs.google.com/forms/d/e/1FAIpQLSfNOq-KU2SrfBw8MSBIh_f5VgwPk9Mf2bHP7BcZC3UzWa35GA/viewform?usp=sf_link" target="_blank") Feedback

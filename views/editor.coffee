@@ -1,4 +1,8 @@
+AboutTemplate = require "../templates/about"
+PrintPreTemplate = require "../templates/print-pre"
 TextareaTemplate = require "../templates/textarea"
+
+{version} = require "../pixie"
 
 module.exports = (system, FileIO) ->
   {MenuBar, Modal, Observable, Util:{parseMenu}, Window} = system.UI
@@ -19,7 +23,7 @@ module.exports = (system, FileIO) ->
   textContent.observe (value) ->
     handlers.saved value is initialValue
 
-  textarea = TextareaTemplate
+  elementPresenter =
     fontStyle: ->
       fontFamily: fontStyle()
     value: textContent
@@ -28,6 +32,9 @@ module.exports = (system, FileIO) ->
         whiteSpace: "pre-wrap"
       else
         whiteSpace: "pre"
+
+  textarea = TextareaTemplate elementPresenter
+  printElement = PrintPreTemplate elementPresenter
 
   textarea.spellcheck = false
 
@@ -49,7 +56,8 @@ module.exports = (system, FileIO) ->
 
     # Printing
     pageSetup: TODO
-    print: TODO
+    print: ->
+      window.print()
 
     exit: ->
       system.exit()
@@ -87,7 +95,18 @@ module.exports = (system, FileIO) ->
 
     statusBar: TODO
     viewHelp: TODO
-    aboutNotepad: TODO
+    aboutNotepad: ->
+      Modal.show AboutTemplate
+        version: version
+
+  # TODO: Add in this Edit submenu some day
+  """
+        -
+        [F]ind
+        Find [N]ext
+        [R]eplace
+        [G]o To
+  """
 
   menuBar = MenuBar
     items: parseMenu """
@@ -97,7 +116,6 @@ module.exports = (system, FileIO) ->
         [S]ave
         Save [A]s
         -
-        Page Set[u]p
         [P]rint
         -
         E[x]it
@@ -107,24 +125,14 @@ module.exports = (system, FileIO) ->
         -
         Cu[t]
         [C]opy
-        [P]aste
         De[l]ete
-        -
-        [F]ind
-        Find [N]ext
-        [R]eplace
-        [G]o To
         -
         Select [A]ll
         Time/[D]ate
       F[o]rmat
         [W]ord Wrap
         [F]ont...
-      [V]iew
-        [S]tatus Bar
       [H]elp
-        View [H]elp
-        -
         [A]bout Notepad
     """
     handlers: handlers
@@ -141,7 +149,11 @@ module.exports = (system, FileIO) ->
 
     "Notepad.exe#{path}#{savedIndicator}"
 
-  document.body.appendChild menuBar.element
-  document.body.appendChild textarea
+  editorElement = document.createElement "editor"
+  editorElement.appendChild menuBar.element
+  editorElement.appendChild textarea
+  editorElement.appendChild printElement
+
+  handlers.element = editorElement
 
   return handlers
