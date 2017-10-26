@@ -3,8 +3,7 @@ Editor = require "./views/editor"
 
 SystemClient = require "sys"
 SystemClient.applyExtensions()
-{system, application, postmaster, util} = SystemClient()
-{UI} = system
+{system, application, postmaster, util, UI} = client = SystemClient()
 {Modal} = UI
 
 # Add our style after system client UI styles so we can override
@@ -12,7 +11,7 @@ style = document.createElement "style"
 style.innerHTML = require "./style"
 document.head.appendChild style
 
-editor = Editor(system, application, util.FileIO)
+editor = Editor(client)
 
 Drop document, (e) ->
   return if e.defaultPrevented

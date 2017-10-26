@@ -4,8 +4,10 @@ TextareaTemplate = require "../templates/textarea"
 
 {version} = require "../pixie"
 
-module.exports = (system, application, FileIO) ->
-  {MenuBar, Modal, Observable, Util:{parseMenu}, Window} = system.UI
+module.exports = (client) ->
+  {system, application, UI, util} = client
+  {MenuBar, Modal, Observable, Util:{parseMenu}} = UI
+  {FileIO} = util
 
   exec = (cmd) ->
     ->
