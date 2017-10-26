@@ -217,7 +217,7 @@
     },
     "style.styl": {
       "path": "style.styl",
-      "content": "body\n  display: flex\n\n  > editor\n    display: flex\n    flex-direction: column\n    flex: 1\n\n    > pre\n      display: none\n\n    > textarea\n      border: none\n      flex: 1\n      font-family: monospace\n      font-size: 14px\n      padding: 2px 4px\n      resize: none\n\ncontainer.about\n  padding: 0 1em\n\n@media print\n  menu.bar, menu\n    display: none\n\n  body\n    display: initial\n\n    > editor\n      display: initial\n      > textarea\n        display: none\n      > pre\n        display: block\n",
+      "content": "body\n  display: flex\n\neditor\n  display: flex\n  flex-direction: column\n  flex: 1\n\n  > pre\n    display: none\n\n  > textarea\n    border: none\n    flex: 1\n    font-family: monospace\n    font-size: 14px\n    padding: 2px 4px\n    resize: none\n\ncontainer.about\n  padding: 0 1em\n\n@media print\n  menu.bar, menu\n    display: none\n\n  body\n    display: initial\n\n  editor\n    display: initial\n    > textarea\n      display: none\n    > pre\n      display: block\n",
       "mode": "100644",
       "type": "blob"
     },
@@ -262,7 +262,7 @@
     },
     "style": {
       "path": "style",
-      "content": "module.exports = \"body {\\n  display: flex;\\n}\\nbody > editor {\\n  display: flex;\\n  flex-direction: column;\\n  flex: 1;\\n}\\nbody > editor > pre {\\n  display: none;\\n}\\nbody > editor > textarea {\\n  border: none;\\n  flex: 1;\\n  font-family: monospace;\\n  font-size: 14px;\\n  padding: 2px 4px;\\n  resize: none;\\n}\\ncontainer.about {\\n  padding: 0 1em;\\n}\\n@media print {\\n  menu.bar,\\n  menu {\\n    display: none;\\n  }\\n  body {\\n    display: initial;\\n  }\\n  body > editor {\\n    display: initial;\\n  }\\n  body > editor > textarea {\\n    display: none;\\n  }\\n  body > editor > pre {\\n    display: block;\\n  }\\n}\\n\";",
+      "content": "module.exports = \"body {\\n  display: flex;\\n}\\neditor {\\n  display: flex;\\n  flex-direction: column;\\n  flex: 1;\\n}\\neditor > pre {\\n  display: none;\\n}\\neditor > textarea {\\n  border: none;\\n  flex: 1;\\n  font-family: monospace;\\n  font-size: 14px;\\n  padding: 2px 4px;\\n  resize: none;\\n}\\ncontainer.about {\\n  padding: 0 1em;\\n}\\n@media print {\\n  menu.bar,\\n  menu {\\n    display: none;\\n  }\\n  body {\\n    display: initial;\\n  }\\n  editor {\\n    display: initial;\\n  }\\n  editor > textarea {\\n    display: none;\\n  }\\n  editor > pre {\\n    display: block;\\n  }\\n}\\n\";",
       "type": "blob"
     },
     "templates/textarea": {
