@@ -50,7 +50,7 @@ module.exports = (system, application, FileIO) ->
       textContent initialValue
     saveData: ->
       data = new Blob [textContent()],
-        type: "text/plain"
+        type: "text/plain; charset=utf-8"
 
       return Promise.resolve data
 
