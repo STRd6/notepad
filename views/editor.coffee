@@ -40,7 +40,7 @@ module.exports = (client) ->
 
   textarea.spellcheck = false
 
-  handlers = Object.assign FileIO(system),
+  handlers = Object.assign FileIO(client),
     loadFile: (blob, path) ->
       blob.readAsText()
       .then (text) ->
