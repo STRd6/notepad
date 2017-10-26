@@ -10,18 +10,18 @@ style = document.createElement "style"
 style.innerHTML = require "./style"
 document.head.appendChild style
 
+editor = Editor(system, application, util.FileIO)
+
 document.addEventListener "keydown", (e) ->
   {ctrlKey:ctrl, key} = e
   if ctrl
     switch key
       when "s"
         e.preventDefault()
-        handlers.save()
+        editor.save()
       when "o"
         e.preventDefault()
-        handlers.open()
-
-editor = Editor(system, util.FileIO)
+        editor.open()
 
 document.body.appendChild editor.element
 
@@ -29,4 +29,3 @@ postmaster.delegate = editor
 
 system.ready()
 .catch console.warn
-

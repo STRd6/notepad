@@ -4,7 +4,7 @@ TextareaTemplate = require "../templates/textarea"
 
 {version} = require "../pixie"
 
-module.exports = (system, FileIO) ->
+module.exports = (system, application, FileIO) ->
   {MenuBar, Modal, Observable, Util:{parseMenu}, Window} = system.UI
 
   exec = (cmd) ->
@@ -137,7 +137,7 @@ module.exports = (system, FileIO) ->
     """
     handlers: handlers
 
-  title = ->
+  title = Observable ->
     path = handlers.currentPath()
     if handlers.saved()
       savedIndicator = ""
@@ -148,6 +148,8 @@ module.exports = (system, FileIO) ->
       path = " - #{path}"
 
     "Notepad.exe#{path}#{savedIndicator}"
+
+  title.observe application.title
 
   editorElement = document.createElement "editor"
   editorElement.appendChild menuBar.element
