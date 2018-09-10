@@ -37,7 +37,7 @@ document.addEventListener "keydown", (e) ->
 
 document.body.appendChild editor.element
 
-postmaster.delegate = editor
+application.delegate = editor
 
 system.ready()
 .catch (e) ->
