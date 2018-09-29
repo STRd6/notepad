@@ -15,6 +15,7 @@ style.innerHTML = require "./style"
 document.head.appendChild style
 
 editor = Editor(client)
+application.delegate = editor
 
 Drop document, (e) ->
   return if e.defaultPrevented
@@ -39,8 +40,6 @@ document.addEventListener "keydown", (e) ->
         editor.open()
 
 document.body.appendChild editor.element
-
-application.delegate = editor
 
 system.ready()
 .catch (e) ->
